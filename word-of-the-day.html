@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word of the Day</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #word-box { padding: 20px; border: 2px solid #333; display: inline-block; background: #f9f9f9; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div id="word-box">
+        <h2 id="word"></h2>
+        <p><strong>Part of Speech:</strong> <span id="partOfSpeech"></span></p>
+        <p><strong>Pronunciation:</strong> <span id="pronunciation"></span></p>
+        <p id="definition"></p>
+    </div>
+
+    <script>
+        const words = [
+            { word: "Astonishing", partOfSpeech: "Adjective", pronunciation: "(uh-STAH-nish-ing)", definition: "Very surprising or amazing" },
+            { word: "Bewildered", partOfSpeech: "Adjective", pronunciation: "(bee-WIL-derd)", definition: "Completely confused or puzzled" },
+            { word: "Compassion", partOfSpeech: "Noun", pronunciation: "(kum-PASH-un)", definition: "Deep care for others" },
+            { word: "Diligence", partOfSpeech: "Noun", pronunciation: "(DIL-uh-jence)", definition: "Careful and persistent effort" },
+            { word: "Exuberant", partOfSpeech: "Adjective", pronunciation: "(ig-ZOO-ber-uhnt)", definition: "Full of excitement and joy" },
+            { word: "Come back next week for a new word!" }
+        ];
+
+        function getWordOfTheDay() {
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // 0 = Sunday, 6 = Saturday
+
+            if (dayOfWeek === 0 || dayOfWeek === 6) {
+                document.getElementById("word-box").innerHTML = "<h2>Come back next week for a new word!</h2>";
+                return;
+            }
+
+            const startDate = new Date(2025, 0, 1); // Adjust to start from your desired date
+            const dayNumber = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+            const wordIndex = dayNumber % words.length;
+            const wordData = words[wordIndex];
+
+            document.getElementById("word").textContent = wordData.word;
+            document.getElementById("partOfSpeech").textContent = wordData.partOfSpeech;
+            document.getElementById("pronunciation").textContent = wordData.pronunciation;
+            document.getElementById("definition").textContent = wordData.definition;
+        }
+
+        getWordOfTheDay();
+    </script>
+</body>
+</html>
